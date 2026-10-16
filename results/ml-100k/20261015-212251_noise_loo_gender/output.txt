@@ -1,0 +1,28 @@
+run folder: F:\php project\fairpower\results\ml-100k\20261015-212251_noise_loo_gender
+ml-100k: protocol=loo, groups=gender (F=273, M=670), users=943, items=1682, test items per user: mean 1.0, median 1, users without test items 0
+
+== tuning iALS on validation NDCG@10 (seed 0)
+  ials {'dim': 64, 'alpha': 1.0, 'reg': 1.0, 'iters': 10}: val NDCG@10 0.0774
+  ials {'dim': 64, 'alpha': 1.0, 'reg': 10.0, 'iters': 10}: val NDCG@10 0.0802
+  ials {'dim': 64, 'alpha': 1.0, 'reg': 100.0, 'iters': 10}: val NDCG@10 0.0371
+  ials {'dim': 64, 'alpha': 5.0, 'reg': 1.0, 'iters': 10}: val NDCG@10 0.0755
+  ials {'dim': 64, 'alpha': 5.0, 'reg': 10.0, 'iters': 10}: val NDCG@10 0.0785
+  ials {'dim': 64, 'alpha': 5.0, 'reg': 100.0, 'iters': 10}: val NDCG@10 0.0563
+  ials {'dim': 64, 'alpha': 20.0, 'reg': 1.0, 'iters': 10}: val NDCG@10 0.0700
+  ials {'dim': 64, 'alpha': 20.0, 'reg': 10.0, 'iters': 10}: val NDCG@10 0.0729
+  ials {'dim': 64, 'alpha': 20.0, 'reg': 100.0, 'iters': 10}: val NDCG@10 0.0800
+  -> selected {'dim': 64, 'alpha': 1.0, 'reg': 10.0, 'iters': 10}
+
+== K = 10 (943 users with test items)
+  NDCG@10 per seed: 0.0781 0.0797 0.0787 0.0789 0.0787
+  Phi_N@10 per seed: 0.0054 0.0091 0.0162 0.0118 0.0125
+  across seeds: mean 0.0110, SD 0.0040, range 0.0054 to 0.0162 (max - min 0.0108)
+  MDE of the gap level (user sampling): 0.0426
+  seed 0 vs seed s, no intervention: s=1: Phi change +0.0037, paired MDE 0.0179; s=2: Phi change +0.0108, paired MDE 0.0139; s=3: Phi change +0.0065, paired MDE 0.0169; s=4: Phi change +0.0072, paired MDE 0.0165
+
+== K = 20 (943 users with test items)
+  NDCG@20 per seed: 0.0956 0.0961 0.0967 0.0961 0.0968
+  Phi_N@20 per seed: 0.0072 0.0117 0.0089 0.0086 0.0115
+  across seeds: mean 0.0096, SD 0.0020, range 0.0072 to 0.0117 (max - min 0.0045)
+  MDE of the gap level (user sampling): 0.0433
+  seed 0 vs seed s, no intervention: s=1: Phi change +0.0045, paired MDE 0.0155; s=2: Phi change +0.0017, paired MDE 0.0125; s=3: Phi change +0.0013, paired MDE 0.0153; s=4: Phi change +0.0042, paired MDE 0.0141

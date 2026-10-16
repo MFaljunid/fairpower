@@ -1,0 +1,48 @@
+seed: 42
+tie_break: random
+datasets:
+  ml-100k:
+    raw_dir: data/raw/ml-100k
+  ml-1m:
+    raw_dir: data/raw/ml-1m
+  gowalla:
+    raw_dir: data/raw/gowalla
+    core: 10
+eval:
+  k: 10
+  bootstrap: 1000
+power:
+  reps: 500
+grids:
+  ials:
+    dim:
+    - 64
+    alpha:
+    - 1.0
+    - 5.0
+    - 20.0
+    reg:
+    - 1.0
+    - 10.0
+    - 100.0
+    iters:
+    - 10
+  ease:
+    lam:
+    - 50.0
+    - 200.0
+    - 500.0
+    - 2000.0
+selection:
+  weights:
+  - 1
+  - 2
+  - 4
+  - 8
+  - 16
+noise:
+  ratios:
+  - 0.8
+  - 0.1
+  - 0.1
+results_dir: results/ml-1m

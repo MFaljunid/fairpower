@@ -1,0 +1,74 @@
+run folder: F:\php project\fairpower\results\ml-100k\20261015-205957_power_ials
+ml-100k: users with >= 13 interactions kept for every m (same users across m); model ials; FULL RANKING, NDCG@10
+
+######## m = 1 held-out items per user: users=943 items=1682
+    ials {'dim': 64, 'alpha': 1.0, 'reg': 1.0, 'iters': 10}: val NDCG@10 0.0774
+    ials {'dim': 64, 'alpha': 1.0, 'reg': 10.0, 'iters': 10}: val NDCG@10 0.0802
+    ials {'dim': 64, 'alpha': 1.0, 'reg': 100.0, 'iters': 10}: val NDCG@10 0.0371
+    ials {'dim': 64, 'alpha': 5.0, 'reg': 1.0, 'iters': 10}: val NDCG@10 0.0755
+    ials {'dim': 64, 'alpha': 5.0, 'reg': 10.0, 'iters': 10}: val NDCG@10 0.0785
+    ials {'dim': 64, 'alpha': 5.0, 'reg': 100.0, 'iters': 10}: val NDCG@10 0.0563
+    ials {'dim': 64, 'alpha': 20.0, 'reg': 1.0, 'iters': 10}: val NDCG@10 0.0700
+    ials {'dim': 64, 'alpha': 20.0, 'reg': 10.0, 'iters': 10}: val NDCG@10 0.0729
+    ials {'dim': 64, 'alpha': 20.0, 'reg': 100.0, 'iters': 10}: val NDCG@10 0.0800
+    -> selected ials {'dim': 64, 'alpha': 1.0, 'reg': 10.0, 'iters': 10} (val NDCG@10 0.0802)
+  overall test NDCG@10 0.0781
+  activity Q4 vs Q1    n=236/235  means 0.1258 / 0.0405  gap -0.0853 [-0.1241, -0.0439] p=0.002  MDE 0.0576 (74% of overall)  |gap|/MDE 1.48
+      power to detect the observed gap by group size: n=100: 0.78  n=235: 0.97
+      planted gap = MDE (0.0695) at n=235 per group: empirical power 0.76 (q=0.156; nominal 0.80)
+  activity Q4 vs Q3    n=236/235  means 0.0621 / 0.0405  gap -0.0217 [-0.0531, +0.0096] p=0.179  MDE 0.0444 (57% of overall)  |gap|/MDE 0.49
+      power to detect the observed gap by group size: n=100: 0.18  n=235: 0.29
+      planted gap = MDE (0.0461) at n=235 per group: empirical power 0.71 (q=0.108; nominal 0.80)
+  gender M vs F        n=273/670  means 0.0819 / 0.0765  gap -0.0054 [-0.0359, +0.0255] p=0.725  MDE 0.0426 (55% of overall)  |gap|/MDE 0.13
+      power to detect the observed gap by group size: n=100: 0.06  n=250: 0.06  n=273: 0.05
+      planted gap = MDE (0.0515) at n=273 per group: empirical power 0.73 (q=0.114; nominal 0.80)
+
+######## m = 3 held-out items per user: users=943 items=1682
+    ials {'dim': 64, 'alpha': 1.0, 'reg': 1.0, 'iters': 10}: val NDCG@10 0.1093
+    ials {'dim': 64, 'alpha': 1.0, 'reg': 10.0, 'iters': 10}: val NDCG@10 0.1133
+    ials {'dim': 64, 'alpha': 1.0, 'reg': 100.0, 'iters': 10}: val NDCG@10 0.0520
+    ials {'dim': 64, 'alpha': 5.0, 'reg': 1.0, 'iters': 10}: val NDCG@10 0.1060
+    ials {'dim': 64, 'alpha': 5.0, 'reg': 10.0, 'iters': 10}: val NDCG@10 0.1097
+    ials {'dim': 64, 'alpha': 5.0, 'reg': 100.0, 'iters': 10}: val NDCG@10 0.0887
+    ials {'dim': 64, 'alpha': 20.0, 'reg': 1.0, 'iters': 10}: val NDCG@10 0.0958
+    ials {'dim': 64, 'alpha': 20.0, 'reg': 10.0, 'iters': 10}: val NDCG@10 0.0987
+    ials {'dim': 64, 'alpha': 20.0, 'reg': 100.0, 'iters': 10}: val NDCG@10 0.1017
+    -> selected ials {'dim': 64, 'alpha': 1.0, 'reg': 10.0, 'iters': 10} (val NDCG@10 0.1133)
+  overall test NDCG@10 0.0960
+  activity Q4 vs Q1    n=236/235  means 0.1346 / 0.0698  gap -0.0648 [-0.0971, -0.0334] p=0.001  MDE 0.0463 (48% of overall)  |gap|/MDE 1.40
+      power to detect the observed gap by group size: n=100: 0.72  n=235: 0.97
+      planted gap = MDE (0.0513) at n=235 per group: empirical power 0.76 (q=0.285; nominal 0.80)
+  activity Q4 vs Q3    n=236/235  means 0.0707 / 0.0698  gap -0.0009 [-0.0307, +0.0249] p=0.952  MDE 0.0399 (42% of overall)  |gap|/MDE 0.02
+      power to detect the observed gap by group size: n=100: 0.05  n=235: 0.06
+      planted gap = MDE (0.0392) at n=235 per group: empirical power 0.73 (q=0.177; nominal 0.80)
+  gender M vs F        n=273/670  means 0.1035 / 0.0929  gap -0.0106 [-0.0348, +0.0174] p=0.417  MDE 0.0368 (38% of overall)  |gap|/MDE 0.29
+      power to detect the observed gap by group size: n=100: 0.07  n=250: 0.10  n=273: 0.12
+      planted gap = MDE (0.0448) at n=273 per group: empirical power 0.75 (q=0.213; nominal 0.80)
+
+######## m = 5 held-out items per user: users=943 items=1682
+    ials {'dim': 64, 'alpha': 1.0, 'reg': 1.0, 'iters': 10}: val NDCG@10 0.1313
+    ials {'dim': 64, 'alpha': 1.0, 'reg': 10.0, 'iters': 10}: val NDCG@10 0.1376
+    ials {'dim': 64, 'alpha': 1.0, 'reg': 100.0, 'iters': 10}: val NDCG@10 0.0644
+    ials {'dim': 64, 'alpha': 5.0, 'reg': 1.0, 'iters': 10}: val NDCG@10 0.1224
+    ials {'dim': 64, 'alpha': 5.0, 'reg': 10.0, 'iters': 10}: val NDCG@10 0.1286
+    ials {'dim': 64, 'alpha': 5.0, 'reg': 100.0, 'iters': 10}: val NDCG@10 0.1102
+    ials {'dim': 64, 'alpha': 20.0, 'reg': 1.0, 'iters': 10}: val NDCG@10 0.1118
+    ials {'dim': 64, 'alpha': 20.0, 'reg': 10.0, 'iters': 10}: val NDCG@10 0.1137
+    ials {'dim': 64, 'alpha': 20.0, 'reg': 100.0, 'iters': 10}: val NDCG@10 0.1215
+    -> selected ials {'dim': 64, 'alpha': 1.0, 'reg': 10.0, 'iters': 10} (val NDCG@10 0.1376)
+  overall test NDCG@10 0.0999
+  activity Q4 vs Q1    n=236/235  means 0.1247 / 0.0759  gap -0.0488 [-0.0777, -0.0208] p=0.002  MDE 0.0406 (41% of overall)  |gap|/MDE 1.20
+      power to detect the observed gap by group size: n=100: 0.57  n=235: 0.90
+      planted gap = MDE (0.0426) at n=235 per group: empirical power 0.80 (q=0.353; nominal 0.80)
+  activity Q4 vs Q3    n=236/235  means 0.0770 / 0.0759  gap -0.0012 [-0.0254, +0.0239] p=0.913  MDE 0.0362 (36% of overall)  |gap|/MDE 0.03
+      power to detect the observed gap by group size: n=100: 0.05  n=235: 0.06
+      planted gap = MDE (0.0336) at n=235 per group: empirical power 0.73 (q=0.237; nominal 0.80)
+  gender M vs F        n=273/670  means 0.1063 / 0.0973  gap -0.0090 [-0.0315, +0.0132] p=0.435  MDE 0.0322 (32% of overall)  |gap|/MDE 0.28
+      power to detect the observed gap by group size: n=100: 0.08  n=250: 0.10  n=273: 0.13
+      planted gap = MDE (0.0390) at n=273 per group: empirical power 0.77 (q=0.276; nominal 0.80)
+
+== SUMMARY: MDE (relative to overall NDCG) and |gap|/MDE
+  comparison                               m=1                     m=3                     m=5
+  activity Q4 vs Q1      0.0576 ( 74%) r=1.48   0.0463 ( 48%) r=1.40   0.0406 ( 41%) r=1.20
+  activity Q4 vs Q3      0.0444 ( 57%) r=0.49   0.0399 ( 42%) r=0.02   0.0362 ( 36%) r=0.03
+  gender M vs F          0.0426 ( 55%) r=0.13   0.0368 ( 38%) r=0.29   0.0322 ( 32%) r=0.28

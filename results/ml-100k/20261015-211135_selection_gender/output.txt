@@ -1,0 +1,44 @@
+run folder: F:\php project\fairpower\results\ml-100k\20261015-211135_selection_gender
+ml-100k: groups=gender, iALS reweighting w in [1.0, 2.0, 4.0, 8.0, 16.0], same users for every m (>= 9 interactions); FULL RANKING, NDCG@10
+
+######## m = 1: users=943 items=1682
+    ials {'dim': 64, 'alpha': 1.0, 'reg': 1.0, 'iters': 10}: val NDCG@10 0.0774
+    ials {'dim': 64, 'alpha': 1.0, 'reg': 10.0, 'iters': 10}: val NDCG@10 0.0802
+    ials {'dim': 64, 'alpha': 1.0, 'reg': 100.0, 'iters': 10}: val NDCG@10 0.0371
+    ials {'dim': 64, 'alpha': 5.0, 'reg': 1.0, 'iters': 10}: val NDCG@10 0.0755
+    ials {'dim': 64, 'alpha': 5.0, 'reg': 10.0, 'iters': 10}: val NDCG@10 0.0785
+    ials {'dim': 64, 'alpha': 5.0, 'reg': 100.0, 'iters': 10}: val NDCG@10 0.0563
+    ials {'dim': 64, 'alpha': 20.0, 'reg': 1.0, 'iters': 10}: val NDCG@10 0.0700
+    ials {'dim': 64, 'alpha': 20.0, 'reg': 10.0, 'iters': 10}: val NDCG@10 0.0729
+    ials {'dim': 64, 'alpha': 20.0, 'reg': 100.0, 'iters': 10}: val NDCG@10 0.0800
+    -> selected ials {'dim': 64, 'alpha': 1.0, 'reg': 10.0, 'iters': 10} (val NDCG@10 0.0802)
+  advantaged group 0, disadvantaged group 1 (validation means [0.0804, 0.0802])
+      w  val all  val gap test all test gap   change              95% CI  MDE chg |chg|/MDE
+      1   0.0802  -0.0002   0.0781  -0.0054  +0.0000  [+0.0000, +0.0000]      nan       nan
+      2   0.0746  -0.0146   0.0816  -0.0099  -0.0045  [-0.0171, +0.0063]   0.0168      0.27
+      4   0.0749  -0.0079   0.0777  -0.0075  -0.0021  [-0.0154, +0.0111]   0.0191      0.11
+      8   0.0766  -0.0039   0.0758  -0.0074  -0.0020  [-0.0164, +0.0124]   0.0208      0.10
+     16   0.0755  -0.0030   0.0754  -0.0071  -0.0017  [-0.0167, +0.0129]   0.0214      0.08
+  validation choice w=1, test choice w=1 -> AGREE; regret +0.0000; Spearman(val gap, test gap) +1.00
+  bootstrap over users (1000): agreement 34%, mean regret +0.0033 (95th pct +0.0118)
+
+######## m = 3: users=943 items=1682
+    ials {'dim': 64, 'alpha': 1.0, 'reg': 1.0, 'iters': 10}: val NDCG@10 0.1093
+    ials {'dim': 64, 'alpha': 1.0, 'reg': 10.0, 'iters': 10}: val NDCG@10 0.1133
+    ials {'dim': 64, 'alpha': 1.0, 'reg': 100.0, 'iters': 10}: val NDCG@10 0.0520
+    ials {'dim': 64, 'alpha': 5.0, 'reg': 1.0, 'iters': 10}: val NDCG@10 0.1060
+    ials {'dim': 64, 'alpha': 5.0, 'reg': 10.0, 'iters': 10}: val NDCG@10 0.1097
+    ials {'dim': 64, 'alpha': 5.0, 'reg': 100.0, 'iters': 10}: val NDCG@10 0.0887
+    ials {'dim': 64, 'alpha': 20.0, 'reg': 1.0, 'iters': 10}: val NDCG@10 0.0958
+    ials {'dim': 64, 'alpha': 20.0, 'reg': 10.0, 'iters': 10}: val NDCG@10 0.0987
+    ials {'dim': 64, 'alpha': 20.0, 'reg': 100.0, 'iters': 10}: val NDCG@10 0.1017
+    -> selected ials {'dim': 64, 'alpha': 1.0, 'reg': 10.0, 'iters': 10} (val NDCG@10 0.1133)
+  advantaged group 0, disadvantaged group 1 (validation means [0.1309, 0.1061])
+      w  val all  val gap test all test gap   change              95% CI  MDE chg |chg|/MDE
+      1   0.1133  -0.0248   0.0960  -0.0106  +0.0000  [+0.0000, +0.0000]      nan       nan
+      2   0.1101  -0.0341   0.0921  -0.0093  +0.0014  [-0.0083, +0.0103]   0.0137      0.10
+      4   0.1071  -0.0339   0.0905  -0.0106  +0.0000  [-0.0118, +0.0124]   0.0167      0.00
+      8   0.1055  -0.0316   0.0885  -0.0117  -0.0010  [-0.0134, +0.0119]   0.0174      0.06
+     16   0.1056  -0.0291   0.0881  -0.0130  -0.0023  [-0.0154, +0.0112]   0.0190      0.12
+  validation choice w=1, test choice w=2 -> DISAGREE; regret +0.0014; Spearman(val gap, test gap) -0.70
+  bootstrap over users (1000): agreement 52%, mean regret +0.0021 (95th pct +0.0094)

@@ -1,0 +1,23 @@
+run folder: F:\php project\fairpower\results\ml-100k\20261015-213402_noise_bpr_random_gender
+ml-100k: protocol=random, groups=gender (F=273, M=670), users=943, items=1682, test items per user: mean 10.7, median 7, users without test items 23
+
+== tuning bpr on validation NDCG@10 (seed 0)
+  bpr {'dim': 64, 'lr': 0.05, 'reg': 0.0001, 'epochs': 20, 'batch': 4096}: val NDCG@10 0.2100
+  bpr {'dim': 64, 'lr': 0.05, 'reg': 0.0001, 'epochs': 40, 'batch': 4096}: val NDCG@10 0.1914
+  bpr {'dim': 64, 'lr': 0.05, 'reg': 0.001, 'epochs': 20, 'batch': 4096}: val NDCG@10 0.2144
+  bpr {'dim': 64, 'lr': 0.05, 'reg': 0.001, 'epochs': 40, 'batch': 4096}: val NDCG@10 0.1977
+  -> selected {'dim': 64, 'lr': 0.05, 'reg': 0.001, 'epochs': 20, 'batch': 4096}
+
+== K = 10 (920 users with test items)
+  NDCG@10 per seed: 0.2153 0.2132 0.2117 0.2066 0.2028
+  Phi_N@10 per seed: 0.0275 0.0117 0.0052 0.0060 0.0232
+  across seeds: mean 0.0147, SD 0.0101, range 0.0052 to 0.0275 (max - min 0.0223)
+  MDE of the gap level (user sampling): 0.0400
+  seed 0 vs seed s, no intervention: s=1: Phi change -0.0159, paired MDE 0.0404; s=2: Phi change -0.0223, paired MDE 0.0394; s=3: Phi change -0.0215, paired MDE 0.0395; s=4: Phi change -0.0044, paired MDE 0.0386
+
+== K = 20 (920 users with test items)
+  NDCG@20 per seed: 0.2427 0.2427 0.2398 0.2388 0.2342
+  Phi_N@20 per seed: 0.0187 0.0083 0.0176 0.0028 0.0114
+  across seeds: mean 0.0117, SD 0.0066, range 0.0028 to 0.0187 (max - min 0.0159)
+  MDE of the gap level (user sampling): 0.0384
+  seed 0 vs seed s, no intervention: s=1: Phi change -0.0104, paired MDE 0.0356; s=2: Phi change -0.0011, paired MDE 0.0339; s=3: Phi change -0.0159, paired MDE 0.0343; s=4: Phi change -0.0073, paired MDE 0.0325

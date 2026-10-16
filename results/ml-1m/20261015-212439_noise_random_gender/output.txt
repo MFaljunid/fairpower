@@ -1,0 +1,28 @@
+run folder: F:\php project\fairpower\results\ml-1m\20261015-212439_noise_random_gender
+ml-1m: protocol=random, groups=gender (F=1709, M=4331), users=6040, items=3706, test items per user: mean 16.6, median 9, users without test items 86
+
+== tuning iALS on validation NDCG@10 (seed 0)
+  ials {'dim': 64, 'alpha': 1.0, 'reg': 1.0, 'iters': 10}: val NDCG@10 0.2876
+  ials {'dim': 64, 'alpha': 1.0, 'reg': 10.0, 'iters': 10}: val NDCG@10 0.2942
+  ials {'dim': 64, 'alpha': 1.0, 'reg': 100.0, 'iters': 10}: val NDCG@10 0.2376
+  ials {'dim': 64, 'alpha': 5.0, 'reg': 1.0, 'iters': 10}: val NDCG@10 0.2727
+  ials {'dim': 64, 'alpha': 5.0, 'reg': 10.0, 'iters': 10}: val NDCG@10 0.2777
+  ials {'dim': 64, 'alpha': 5.0, 'reg': 100.0, 'iters': 10}: val NDCG@10 0.3017
+  ials {'dim': 64, 'alpha': 20.0, 'reg': 1.0, 'iters': 10}: val NDCG@10 0.2102
+  ials {'dim': 64, 'alpha': 20.0, 'reg': 10.0, 'iters': 10}: val NDCG@10 0.2131
+  ials {'dim': 64, 'alpha': 20.0, 'reg': 100.0, 'iters': 10}: val NDCG@10 0.2623
+  -> selected {'dim': 64, 'alpha': 5.0, 'reg': 100.0, 'iters': 10}
+
+== K = 10 (5954 users with test items)
+  NDCG@10 per seed: 0.3040 0.3040 0.3040 0.3042 0.3046
+  Phi_N@10 per seed: 0.0526 0.0525 0.0534 0.0534 0.0529
+  across seeds: mean 0.0530, SD 0.0004, range 0.0525 to 0.0534 (max - min 0.0009)
+  MDE of the gap level (user sampling): 0.0191
+  seed 0 vs seed s, no intervention: s=1: Phi change -0.0001, paired MDE 0.0024; s=2: Phi change +0.0007, paired MDE 0.0022; s=3: Phi change +0.0008, paired MDE 0.0024; s=4: Phi change +0.0003, paired MDE 0.0023
+
+== K = 20 (5954 users with test items)
+  NDCG@20 per seed: 0.3057 0.3060 0.3060 0.3062 0.3064
+  Phi_N@20 per seed: 0.0473 0.0464 0.0466 0.0471 0.0472
+  across seeds: mean 0.0469, SD 0.0004, range 0.0464 to 0.0473 (max - min 0.0008)
+  MDE of the gap level (user sampling): 0.0164
+  seed 0 vs seed s, no intervention: s=1: Phi change -0.0008, paired MDE 0.0018; s=2: Phi change -0.0007, paired MDE 0.0018; s=3: Phi change -0.0002, paired MDE 0.0019; s=4: Phi change -0.0000, paired MDE 0.0018

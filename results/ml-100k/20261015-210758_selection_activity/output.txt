@@ -1,0 +1,1 @@
+run folder: F:\php project\fairpower\results\ml-100k\20261015-210758_selection_activity
