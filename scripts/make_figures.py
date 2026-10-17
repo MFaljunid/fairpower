@@ -11,6 +11,9 @@ Figures (PDF, sized for a single LNCS text column, 12.2 cm):
   fig_power.pdf  power to detect the observed test gap against users per group, leave-one-out (m = 1),
                  ML-100K and ML-1M, with the 0.8 target.
   fig_mde.pdf    MDE relative to overall NDCG@10 against held-out items per user m.
+  fig_selection.pdf  validation gap against test gap for every reweighting weight w (RQ3), ML-100K,
+                 activity and gender groups, m = 1 and m = 3; the validation choice and the test
+                 choice are marked.
 Settings without a run folder are skipped and listed in the console output.
 """
 import argparse
@@ -133,7 +136,7 @@ def fig_power(out, log):
         data.append((title, res))
     if not data:
         return
-    fig, axes = plt.subplots(1, len(data), figsize=(WIDTH, 2.2), sharey=True, squeeze=False)
+    fig, axes = plt.subplots(1, len(data), figsize=(WIDTH * len(data) / 2.5, 2.0), sharey=True, squeeze=False)
     for ax, (title, res) in zip(axes[0], data):
         for key, lab, ls, mk, col in COMPARISONS:
             pc = res["1"]["comparisons"][key]["power_curve"]
@@ -142,7 +145,7 @@ def fig_power(out, log):
         ax.text(1.0, 0.81, "target 0.8", transform=ax.get_yaxis_transform(), ha="right", va="bottom",
                 fontsize=6, color=RED)
         ax.set_xscale("log")
-        ax.set_xticks([100, 250, 500, 1000, 2500])
+        ax.set_xticks([100, 500, 2500])
         ax.xaxis.set_major_formatter(ScalarFormatter())
         ax.xaxis.set_minor_formatter(NullFormatter())
         ax.set_ylim(0, 1.03)
@@ -158,16 +161,24 @@ def fig_power(out, log):
 
 def fig_mde(out, log):
     data = []
-    for ds, title in (("ml-100k", "ML-100K"), ("ml-1m", "ML-1M")):
-        res, _ = latest(ds, ["_power_ials"], "power.json")
-        if res is not None:
-            data.append((title, res))
+    for ds, title in (("ml-100k", "ML-100K"), ("ml-1m", "ML-1M"), ("gowalla", "Gowalla")):
+        res, name = latest(ds, ["_power_ials"], "power.json")
+        if res is None:
+            log(f"  mde: no run for {ds} (skipped)")
+            continue
+        if len(res) < 2:                       # a run with a single m cannot show the trend
+            log(f"  mde: {ds} <- {name} has only m = {list(res)} (skipped)")
+            continue
+        log(f"  mde: {ds} <- {name}")
+        data.append((title, res))
     if not data:
         return
-    fig, axes = plt.subplots(1, len(data), figsize=(WIDTH, 2.0), sharey=True, squeeze=False)
+    fig, axes = plt.subplots(1, len(data), figsize=(WIDTH * len(data) / 2.5, 2.0), sharey=True, squeeze=False)
     for ax, (title, res) in zip(axes[0], data):
         ms = sorted(int(m) for m in res)
         for key, lab, ls, mk, col in COMPARISONS:
+            if key not in res[str(ms[0])]["comparisons"]:
+                continue                        # e.g. no gender attribute in Gowalla
             ax.plot(ms, [100 * res[str(m)]["comparisons"][key]["mde_rel"] for m in ms], ls=ls, marker=mk,
                     ms=4, lw=1.5, color=col, label=lab)
         ax.set_xticks(ms)
@@ -181,6 +192,50 @@ def fig_mde(out, log):
     log(f"  -> {out / 'fig_mde.pdf'}")
 
 
+def fig_selection(out, log):
+    panels = []
+    for groups in ("activity", "gender"):
+        res, name = latest("ml-100k", [f"_selection_{groups}"], "selection.json")
+        if res is None:
+            log(f"  selection: no run for {groups} (skipped)")
+            continue
+        log(f"  selection: {groups} <- {name}")
+        panels.append((groups, res))
+    if not panels:
+        return
+    fig, axes = plt.subplots(1, len(panels), figsize=(WIDTH, 2.4), squeeze=False)
+    for ax, (groups, res) in zip(axes[0], panels):
+        for m, col, mk in (("1", BLUE, "o"), ("3", ORANGE, "s")):
+            if m not in res:
+                continue
+            rows = res[m]["rows"]
+            vg = [abs(r["val_gap"]) for r in rows]
+            tg = [abs(r["test_gap"]) for r in rows]
+            ax.plot(vg, tg, ls=":", color=col, lw=0.8, zorder=1)
+            ax.scatter(vg, tg, color=col, marker=mk, s=22, zorder=2, label=f"$m={m}$")
+            for r, x, y in zip(rows, vg, tg):
+                ax.annotate(f"{r['w']:g}", (x, y), textcoords="offset points", xytext=(3, 2), fontsize=5.5,
+                            color=col)
+            vi = [r["w"] for r in rows].index(res[m]["val_choice"])
+            ti = [r["w"] for r in rows].index(res[m]["test_choice"])
+            ax.scatter(vg[vi], tg[vi], s=110, facecolors="none", edgecolors=col, linewidths=1.0, zorder=3)
+            ax.scatter(vg[ti], tg[ti], s=110, marker="*", facecolors="none", edgecolors=col, linewidths=0.8,
+                       zorder=3)
+        ax.set_xlabel("|validation gap|")
+        ax.set_title(f"{groups.capitalize()} groups", fontsize=8)
+    axes[0][0].set_ylabel("|test gap|")
+    from matplotlib.lines import Line2D
+    handles = [Line2D([], [], marker="o", ls="", color=BLUE), Line2D([], [], marker="s", ls="", color=ORANGE),
+               Line2D([], [], marker="o", ls="", markerfacecolor="none", markeredgecolor="0.3", markersize=9),
+               Line2D([], [], marker="*", ls="", markerfacecolor="none", markeredgecolor="0.3", markersize=9)]
+    fig.legend(handles, ["$m=1$", "$m=3$", "validation choice", "test choice"], frameon=False,
+               loc="lower center", ncol=4, fontsize=6.5)
+    fig.tight_layout(rect=(0, 0.08, 1, 1))
+    fig.savefig(out / "fig_selection.pdf")
+    plt.close(fig)
+    log(f"  -> {out / 'fig_selection.pdf'} (numbers next to points: reweighting weight w)")
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default="paper/figures")
@@ -188,6 +243,6 @@ if __name__ == "__main__":
     out = Path(args.out)
     out = out if out.is_absolute() else ROOT / out
     out.mkdir(parents=True, exist_ok=True)
-    for f in (fig_noise, fig_power, fig_mde):
+    for f in (fig_noise, fig_power, fig_mde, fig_selection):
         f(out, print)
     sys.exit(0)

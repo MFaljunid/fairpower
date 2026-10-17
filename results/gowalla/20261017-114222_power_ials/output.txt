@@ -1,0 +1,64 @@
+run folder: F:\php project\fairpower\results\gowalla\20261017-114222_power_ials
+gowalla: users with >= 13 interactions kept for every m (same users across m); model ials; FULL RANKING, NDCG@10
+
+######## m = 1 held-out items per user: users=24070 items=40988
+    ials {'dim': 64, 'alpha': 1.0, 'reg': 1.0, 'iters': 10}: val NDCG@10 0.0365
+    ials {'dim': 64, 'alpha': 1.0, 'reg': 10.0, 'iters': 10}: val NDCG@10 0.0363
+    ials {'dim': 64, 'alpha': 1.0, 'reg': 100.0, 'iters': 10}: val NDCG@10 0.0179
+    ials {'dim': 64, 'alpha': 5.0, 'reg': 1.0, 'iters': 10}: val NDCG@10 0.0406
+    ials {'dim': 64, 'alpha': 5.0, 'reg': 10.0, 'iters': 10}: val NDCG@10 0.0406
+    ials {'dim': 64, 'alpha': 5.0, 'reg': 100.0, 'iters': 10}: val NDCG@10 0.0375
+    ials {'dim': 64, 'alpha': 20.0, 'reg': 1.0, 'iters': 10}: val NDCG@10 0.0423
+    ials {'dim': 64, 'alpha': 20.0, 'reg': 10.0, 'iters': 10}: val NDCG@10 0.0421
+    ials {'dim': 64, 'alpha': 20.0, 'reg': 100.0, 'iters': 10}: val NDCG@10 0.0423
+    -> selected ials {'dim': 64, 'alpha': 20.0, 'reg': 100.0, 'iters': 10} (val NDCG@10 0.0423)
+  overall test NDCG@10 0.0380
+  activity Q4 vs Q1    n=6018/6017  means 0.0419 / 0.0286  gap -0.0133 [-0.0187, -0.0081] p=0.001  MDE 0.0075 (20% of overall)  |gap|/MDE 1.78
+      power to detect the observed gap by group size: n=100: 0.11  n=250: 0.15  n=500: 0.33  n=1000: 0.56  n=2500: 0.88  n=6017: 1.00
+      planted gap = MDE (0.0081) at n=6017 per group: empirical power 0.78 (q=0.017; nominal 0.80)
+  activity Q4 vs Q3    n=6018/6017  means 0.0382 / 0.0286  gap -0.0096 [-0.0152, -0.0043] p=0.001  MDE 0.0073 (19% of overall)  |gap|/MDE 1.30
+      power to detect the observed gap by group size: n=100: 0.08  n=250: 0.10  n=500: 0.19  n=1000: 0.31  n=2500: 0.66  n=6017: 0.94
+      planted gap = MDE (0.0078) at n=6017 per group: empirical power 0.72 (q=0.016; nominal 0.80)
+
+######## m = 3 held-out items per user: users=24070 items=40988
+    ials {'dim': 64, 'alpha': 1.0, 'reg': 1.0, 'iters': 10}: val NDCG@10 0.0551
+    ials {'dim': 64, 'alpha': 1.0, 'reg': 10.0, 'iters': 10}: val NDCG@10 0.0549
+    ials {'dim': 64, 'alpha': 1.0, 'reg': 100.0, 'iters': 10}: val NDCG@10 0.0227
+    ials {'dim': 64, 'alpha': 5.0, 'reg': 1.0, 'iters': 10}: val NDCG@10 0.0595
+    ials {'dim': 64, 'alpha': 5.0, 'reg': 10.0, 'iters': 10}: val NDCG@10 0.0594
+    ials {'dim': 64, 'alpha': 5.0, 'reg': 100.0, 'iters': 10}: val NDCG@10 0.0556
+    ials {'dim': 64, 'alpha': 20.0, 'reg': 1.0, 'iters': 10}: val NDCG@10 0.0614
+    ials {'dim': 64, 'alpha': 20.0, 'reg': 10.0, 'iters': 10}: val NDCG@10 0.0615
+    ials {'dim': 64, 'alpha': 20.0, 'reg': 100.0, 'iters': 10}: val NDCG@10 0.0615
+    -> selected ials {'dim': 64, 'alpha': 20.0, 'reg': 100.0, 'iters': 10} (val NDCG@10 0.0615)
+  overall test NDCG@10 0.0514
+  activity Q4 vs Q1    n=6018/6017  means 0.0609 / 0.0364  gap -0.0245 [-0.0289, -0.0202] p=0.001  MDE 0.0062 (12% of overall)  |gap|/MDE 3.97
+      power to detect the observed gap by group size: n=100: 0.29  n=250: 0.62  n=500: 0.89  n=1000: 1.00  n=2500: 1.00  n=6017: 1.00
+      planted gap = MDE (0.0069) at n=6017 per group: empirical power 0.83 (q=0.031; nominal 0.80)
+  activity Q4 vs Q3    n=6018/6017  means 0.0513 / 0.0364  gap -0.0149 [-0.0192, -0.0108] p=0.001  MDE 0.0060 (12% of overall)  |gap|/MDE 2.50
+      power to detect the observed gap by group size: n=100: 0.14  n=250: 0.30  n=500: 0.55  n=1000: 0.83  n=2500: 1.00  n=6017: 1.00
+      planted gap = MDE (0.0065) at n=6017 per group: empirical power 0.79 (q=0.028; nominal 0.80)
+
+######## m = 5 held-out items per user: users=24070 items=40988
+    ials {'dim': 64, 'alpha': 1.0, 'reg': 1.0, 'iters': 10}: val NDCG@10 0.0642
+    ials {'dim': 64, 'alpha': 1.0, 'reg': 10.0, 'iters': 10}: val NDCG@10 0.0636
+    ials {'dim': 64, 'alpha': 1.0, 'reg': 100.0, 'iters': 10}: val NDCG@10 0.0263
+    ials {'dim': 64, 'alpha': 5.0, 'reg': 1.0, 'iters': 10}: val NDCG@10 0.0700
+    ials {'dim': 64, 'alpha': 5.0, 'reg': 10.0, 'iters': 10}: val NDCG@10 0.0697
+    ials {'dim': 64, 'alpha': 5.0, 'reg': 100.0, 'iters': 10}: val NDCG@10 0.0635
+    ials {'dim': 64, 'alpha': 20.0, 'reg': 1.0, 'iters': 10}: val NDCG@10 0.0723
+    ials {'dim': 64, 'alpha': 20.0, 'reg': 10.0, 'iters': 10}: val NDCG@10 0.0725
+    ials {'dim': 64, 'alpha': 20.0, 'reg': 100.0, 'iters': 10}: val NDCG@10 0.0719
+    -> selected ials {'dim': 64, 'alpha': 20.0, 'reg': 10.0, 'iters': 10} (val NDCG@10 0.0725)
+  overall test NDCG@10 0.0583
+  activity Q4 vs Q1    n=6018/6017  means 0.0666 / 0.0395  gap -0.0271 [-0.0309, -0.0237] p=0.001  MDE 0.0055 (9% of overall)  |gap|/MDE 4.93
+      power to detect the observed gap by group size: n=100: 0.41  n=250: 0.80  n=500: 0.97  n=1000: 1.00  n=2500: 1.00  n=6017: 1.00
+      planted gap = MDE (0.0062) at n=6017 per group: empirical power 0.79 (q=0.040; nominal 0.80)
+  activity Q4 vs Q3    n=6018/6017  means 0.0590 / 0.0395  gap -0.0195 [-0.0231, -0.0158] p=0.001  MDE 0.0053 (9% of overall)  |gap|/MDE 3.68
+      power to detect the observed gap by group size: n=100: 0.25  n=250: 0.55  n=500: 0.85  n=1000: 0.99  n=2500: 1.00  n=6017: 1.00
+      planted gap = MDE (0.0058) at n=6017 per group: empirical power 0.79 (q=0.037; nominal 0.80)
+
+== SUMMARY: MDE (relative to overall NDCG) and |gap|/MDE
+  comparison                               m=1                     m=3                     m=5
+  activity Q4 vs Q1      0.0075 ( 20%) r=1.78   0.0062 ( 12%) r=3.97   0.0055 (  9%) r=4.93
+  activity Q4 vs Q3      0.0073 ( 19%) r=1.30   0.0060 ( 12%) r=2.50   0.0053 (  9%) r=3.68

@@ -1,0 +1,9 @@
+run folder: F:\php project\fairpower\results\ml-100k\20261017-143713_noise_bpr_temporal20_gender
+ml-100k: protocol=temporal20, groups=gender (F=273, M=670), users=943, items=1682, test items per user: mean 21.2, median 13, users without test items 0; varying: train
+
+== tuning bpr on validation NDCG@10 (default split, model seed 0)
+  bpr {'dim': 64, 'lr': 0.05, 'reg': 0.0001, 'epochs': 20, 'batch': 4096}: val NDCG@10 0.1080
+  bpr {'dim': 64, 'lr': 0.05, 'reg': 0.0001, 'epochs': 40, 'batch': 4096}: val NDCG@10 0.1016
+  bpr {'dim': 64, 'lr': 0.05, 'reg': 0.001, 'epochs': 20, 'batch': 4096}: val NDCG@10 0.1076
+  bpr {'dim': 64, 'lr': 0.05, 'reg': 0.001, 'epochs': 40, 'batch': 4096}: val NDCG@10 0.1028
+  -> selected {'dim': 64, 'lr': 0.05, 'reg': 0.0001, 'epochs': 20, 'batch': 4096}

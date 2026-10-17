@@ -1,0 +1,4 @@
+run folder: F:\php project\fairpower\results\gowalla\20261017-093807_power_ials
+gowalla: users with >= 13 interactions kept for every m (same users across m); model ials; FULL RANKING, NDCG@10
+
+######## m = 1 held-out items per user: users=24070 items=40988

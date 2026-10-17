@@ -1,0 +1,5 @@
+run folder: F:\php project\fairpower\results\ml-1m\20261016-233743_noise_bpr_random_gender_varyboth
+ml-1m: protocol=random, groups=gender (F=1709, M=4331), users=6040, items=3706, test items per user: mean 16.6, median 9, users without test items 86; varying: both
+
+== tuning bpr on validation NDCG@10 (default split, model seed 0)
+  bpr {'dim': 64, 'lr': 0.05, 'reg': 0.0001, 'epochs': 20, 'batch': 4096}: val NDCG@10 0.1746

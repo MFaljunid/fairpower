@@ -1,0 +1,23 @@
+run folder: F:\php project\fairpower\results\ml-1m\20261017-082510_noise_bpr_random_gender_varyboth
+ml-1m: protocol=random, groups=gender (F=1709, M=4331), users=6040, items=3706, test items per user: mean 16.6, median 9, users without test items 86; varying: both
+
+== tuning bpr on validation NDCG@10 (default split, model seed 0)
+  bpr {'dim': 64, 'lr': 0.05, 'reg': 0.0001, 'epochs': 20, 'batch': 4096}: val NDCG@10 0.1746
+  bpr {'dim': 64, 'lr': 0.05, 'reg': 0.0001, 'epochs': 40, 'batch': 4096}: val NDCG@10 0.1651
+  bpr {'dim': 64, 'lr': 0.05, 'reg': 0.001, 'epochs': 20, 'batch': 4096}: val NDCG@10 0.1804
+  bpr {'dim': 64, 'lr': 0.05, 'reg': 0.001, 'epochs': 40, 'batch': 4096}: val NDCG@10 0.1754
+  -> selected {'dim': 64, 'lr': 0.05, 'reg': 0.001, 'epochs': 20, 'batch': 4096}
+
+== K = 10
+  NDCG@10 per run: 0.1848 0.1762 0.1775 0.1814 0.1862
+  Phi_N@10 per run: 0.0346 0.0233 0.0259 0.0344 0.0322
+  across runs: mean 0.0301, SD 0.0052, range 0.0233 to 0.0346 (max - min 0.0113)
+  MDE of the gap level (user sampling): 0.0143 (mean over splits, 0.0140 to 0.0145)
+  paired MDE not computed: the test items differ between splits
+
+== K = 20
+  NDCG@20 per run: 0.1969 0.1910 0.1915 0.1968 0.2003
+  Phi_N@20 per run: 0.0296 0.0214 0.0257 0.0282 0.0300
+  across runs: mean 0.0270, SD 0.0035, range 0.0214 to 0.0300 (max - min 0.0086)
+  MDE of the gap level (user sampling): 0.0130 (mean over splits, 0.0128 to 0.0132)
+  paired MDE not computed: the test items differ between splits

@@ -1,0 +1,26 @@
+run folder: F:\php project\fairpower\results\gowalla\20261017-094259_power_ials
+gowalla: users with >= 5 interactions kept for every m (same users across m); model ials; FULL RANKING, NDCG@10
+
+######## m = 1 held-out items per user: users=29858 items=40988
+    ials {'dim': 64, 'alpha': 1.0, 'reg': 1.0, 'iters': 10}: val NDCG@10 0.0389
+    ials {'dim': 64, 'alpha': 1.0, 'reg': 10.0, 'iters': 10}: val NDCG@10 0.0388
+    ials {'dim': 64, 'alpha': 1.0, 'reg': 100.0, 'iters': 10}: val NDCG@10 0.0192
+    ials {'dim': 64, 'alpha': 5.0, 'reg': 1.0, 'iters': 10}: val NDCG@10 0.0432
+    ials {'dim': 64, 'alpha': 5.0, 'reg': 10.0, 'iters': 10}: val NDCG@10 0.0433
+    ials {'dim': 64, 'alpha': 5.0, 'reg': 100.0, 'iters': 10}: val NDCG@10 0.0407
+    ials {'dim': 64, 'alpha': 20.0, 'reg': 1.0, 'iters': 10}: val NDCG@10 0.0456
+    ials {'dim': 64, 'alpha': 20.0, 'reg': 10.0, 'iters': 10}: val NDCG@10 0.0457
+    ials {'dim': 64, 'alpha': 20.0, 'reg': 100.0, 'iters': 10}: val NDCG@10 0.0453
+    -> selected ials {'dim': 64, 'alpha': 20.0, 'reg': 10.0, 'iters': 10} (val NDCG@10 0.0457)
+  overall test NDCG@10 0.0415
+  activity Q4 vs Q1    n=7465/7464  means 0.0515 / 0.0302  gap -0.0212 [-0.0260, -0.0161] p=0.001  MDE 0.0072 (17% of overall)  |gap|/MDE 2.95
+      power to detect the observed gap by group size: n=100: 0.18  n=250: 0.35  n=500: 0.57  n=1000: 0.86  n=2500: 1.00  n=7464: 1.00
+      planted gap = MDE (0.0081) at n=7464 per group: empirical power 0.75 (q=0.017; nominal 0.80)
+  activity Q4 vs Q3    n=7465/7464  means 0.0408 / 0.0302  gap -0.0106 [-0.0155, -0.0060] p=0.001  MDE 0.0068 (16% of overall)  |gap|/MDE 1.56
+      power to detect the observed gap by group size: n=100: 0.09  n=250: 0.14  n=500: 0.21  n=1000: 0.34  n=2500: 0.72  n=7464: 0.99
+      planted gap = MDE (0.0073) at n=7464 per group: empirical power 0.77 (q=0.015; nominal 0.80)
+
+== SUMMARY: MDE (relative to overall NDCG) and |gap|/MDE
+  comparison                               m=1
+  activity Q4 vs Q1      0.0072 ( 17%) r=2.95
+  activity Q4 vs Q3      0.0068 ( 16%) r=1.56
