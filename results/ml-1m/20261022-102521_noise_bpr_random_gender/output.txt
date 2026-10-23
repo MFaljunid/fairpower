@@ -1,0 +1,23 @@
+run folder: F:\php project\fairpower\results\ml-1m\20261022-102521_noise_bpr_random_gender
+ml-1m: protocol=random, groups=gender (F=1709, M=4331), users=6040, items=3706, test items per user: mean 16.6, median 9, users without test items 86; varying: train
+
+== tuning bpr on validation NDCG@10 (default split, model seed 0)
+  bpr {'dim': 64, 'lr': 0.05, 'reg': 0.0001, 'epochs': 20, 'batch': 4096}: val NDCG@10 0.1746
+  bpr {'dim': 64, 'lr': 0.05, 'reg': 0.0001, 'epochs': 40, 'batch': 4096}: val NDCG@10 0.1651
+  bpr {'dim': 64, 'lr': 0.05, 'reg': 0.001, 'epochs': 20, 'batch': 4096}: val NDCG@10 0.1804
+  bpr {'dim': 64, 'lr': 0.05, 'reg': 0.001, 'epochs': 40, 'batch': 4096}: val NDCG@10 0.1754
+  -> selected {'dim': 64, 'lr': 0.05, 'reg': 0.001, 'epochs': 20, 'batch': 4096}
+
+== K = 10
+  NDCG@10 per run: 0.1848 0.1799 0.1803 0.1835 0.1812 0.1808 0.1821 0.1819 0.1809 0.1804 0.1825 0.1820 0.1797 0.1838 0.1843 0.1781 0.1762 0.1773 0.1807 0.1811
+  Phi_N@10 per run: 0.0346 0.0252 0.0313 0.0340 0.0267 0.0311 0.0231 0.0268 0.0311 0.0278 0.0349 0.0217 0.0252 0.0358 0.0258 0.0261 0.0281 0.0276 0.0238 0.0290
+  across runs: mean 0.0285, SD 0.0041, range 0.0217 to 0.0358 (max - min 0.0141)
+  MDE of the gap level (user sampling): 0.0143
+  seed 0 vs seed s, no intervention: s=1: Phi change -0.0094, paired MDE 0.0141; s=2: Phi change -0.0033, paired MDE 0.0137; s=3: Phi change -0.0006, paired MDE 0.0142; s=4: Phi change -0.0079, paired MDE 0.0143; s=5: Phi change -0.0035, paired MDE 0.0137; s=6: Phi change -0.0115, paired MDE 0.0140; s=7: Phi change -0.0078, paired MDE 0.0145; s=8: Phi change -0.0035, paired MDE 0.0142; s=9: Phi change -0.0068, paired MDE 0.0136; s=10: Phi change +0.0002, paired MDE 0.0139; s=11: Phi change -0.0129, paired MDE 0.0139; s=12: Phi change -0.0094, paired MDE 0.0141; s=13: Phi change +0.0012, paired MDE 0.0142; s=14: Phi change -0.0088, paired MDE 0.0141; s=15: Phi change -0.0085, paired MDE 0.0141; s=16: Phi change -0.0065, paired MDE 0.0139; s=17: Phi change -0.0070, paired MDE 0.0138; s=18: Phi change -0.0108, paired MDE 0.0141; s=19: Phi change -0.0056, paired MDE 0.0145
+
+== K = 20
+  NDCG@20 per run: 0.1969 0.1951 0.1943 0.1967 0.1953 0.1947 0.1959 0.1963 0.1942 0.1950 0.1959 0.1944 0.1947 0.1961 0.1971 0.1934 0.1907 0.1934 0.1945 0.1957
+  Phi_N@20 per run: 0.0296 0.0247 0.0273 0.0281 0.0226 0.0288 0.0249 0.0244 0.0257 0.0244 0.0298 0.0203 0.0259 0.0300 0.0229 0.0234 0.0260 0.0235 0.0235 0.0253
+  across runs: mean 0.0256, SD 0.0027, range 0.0203 to 0.0300 (max - min 0.0098)
+  MDE of the gap level (user sampling): 0.0129
+  seed 0 vs seed s, no intervention: s=1: Phi change -0.0048, paired MDE 0.0121; s=2: Phi change -0.0023, paired MDE 0.0118; s=3: Phi change -0.0015, paired MDE 0.0123; s=4: Phi change -0.0069, paired MDE 0.0123; s=5: Phi change -0.0008, paired MDE 0.0117; s=6: Phi change -0.0047, paired MDE 0.0119; s=7: Phi change -0.0052, paired MDE 0.0125; s=8: Phi change -0.0039, paired MDE 0.0120; s=9: Phi change -0.0052, paired MDE 0.0118; s=10: Phi change +0.0003, paired MDE 0.0119; s=11: Phi change -0.0093, paired MDE 0.0120; s=12: Phi change -0.0036, paired MDE 0.0121; s=13: Phi change +0.0004, paired MDE 0.0125; s=14: Phi change -0.0067, paired MDE 0.0122; s=15: Phi change -0.0062, paired MDE 0.0121; s=16: Phi change -0.0036, paired MDE 0.0120; s=17: Phi change -0.0060, paired MDE 0.0119; s=18: Phi change -0.0060, paired MDE 0.0121; s=19: Phi change -0.0043, paired MDE 0.0127

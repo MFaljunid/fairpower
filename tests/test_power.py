@@ -129,3 +129,28 @@ def test_temporal_ratio_holds_out_recent_fraction():
         assert len(s.test[u]) == max(1, int(round(0.2 * n)))
         assert not set(s.train[u]) & set(s.test[u]) and not set(s.val[u]) & set(s.test[u])
     assert len(s.test) == len(sizes)
+
+
+def test_analytic_power_at_mde_and_zero():
+    from fairpower.power import analytic_power
+    assert abs(analytic_power(0.01, 0.01) - 0.80) < 1e-6
+    assert abs(analytic_power(0.0, 0.01) - 0.05) < 1e-6
+    assert analytic_power(0.02, 0.01) > 0.99
+
+
+def test_scale_scheme_size_and_power():
+    rng = np.random.default_rng(4)
+    y = np.where(rng.random(5000) < 0.1, rng.random(5000), 0.0)
+    g = np.zeros(5000, int)
+    p0, c0 = planted_power(y, g, 0, 1000, 0.0, reps=400, scheme="scale")
+    p1, c1 = planted_power(y, g, 0, 1000, 0.03, reps=400, scheme="scale")
+    assert p0 < 0.10 and c0 == 1.0
+    assert p1 > 0.5 and c1 > 1.0
+
+
+def test_scale_scheme_plants_exact_gap_after_clipping():
+    rng = np.random.default_rng(5)
+    y = np.where(rng.random(4000) < 0.3, rng.choice([1.0, 0.63, 0.5, 0.43], 4000), 0.0)   # many ones
+    g = np.zeros(4000, int)
+    _, c = planted_power(y, g, 0, 100, 0.02, reps=5, scheme="scale")
+    assert abs(np.clip(y * c, 0, 1).mean() - y.mean() - 0.02) < 1e-6

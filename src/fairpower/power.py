@@ -64,26 +64,61 @@ def power_curve(y, g, a, b, sizes, reps=500, seed=0):
     return out
 
 
-def planted_power(y, g, a, n, delta, reps=500, seed=0):
-    """Empirical power to detect a planted gap of exactly `delta` (in expectation) with n users per group.
-    Both samples are drawn from group a's observed values. In the second sample each zero value is
-    replaced, with probability q, by a value drawn from the positive values of group a, where
-    q = delta / (share of zeros * mean positive value). This keeps the zero-inflated shape of top-K
-    metrics (a location shift would not). Returns (power, q); power is None if delta is not reachable."""
+def planted_power(y, g, a, n, delta, reps=500, seed=0, scheme="mixture"):
+    """Empirical power to detect a planted gap of `delta` (in expectation) with n users per group.
+    Both samples are drawn from group a's observed values; the second one is modified to plant the gap.
+
+    scheme = "mixture": each zero value of the second sample is replaced, with probability
+        q = delta / (share of zeros * mean positive value), by a value drawn from the positive values
+        of group a. More users receive a hit; the shape of the positive values is unchanged.
+    scheme = "scale": every value of the second sample is multiplied by c and clipped to [0, 1], with c
+        chosen by bisection so that the expected gap after clipping equals delta. The same users keep
+        their hits but rank the held-out item higher; the share of zeros is unchanged. Comparing the two schemes shows how sensitive the empirical power
+        is to the way the gap arises.
+    Returns (power, parameter) with parameter q or c; power is None if delta is not reachable."""
     ya = np.asarray(y, float)[np.asarray(g) == a]
     pos = ya[ya > 0]
     p0 = (ya == 0).mean()
     if len(pos) == 0 or p0 == 0:
         return None, None
-    q = delta / (p0 * pos.mean())
-    if q > 1:
-        return None, float(q)
     rng = np.random.default_rng(seed)
+    if scheme == "mixture":
+        par = delta / (p0 * pos.mean())
+        if par > 1:
+            return None, float(par)
+    elif scheme == "scale":
+        target = ya.mean() + delta
+        if target >= np.clip(ya * 1e6, 0.0, 1.0).mean():
+            return None, None                   # not reachable: every positive value would hit 1
+        lo, hi = 1.0, 2.0
+        while np.clip(ya * hi, 0.0, 1.0).mean() < target:
+            hi *= 2.0
+        for _ in range(60):
+            mid = 0.5 * (lo + hi)
+            if np.clip(ya * mid, 0.0, 1.0).mean() < target:
+                lo = mid
+            else:
+                hi = mid
+        par = 0.5 * (lo + hi)
+    else:
+        raise ValueError(scheme)
     hits = 0
     for _ in range(reps):
         xa = rng.choice(ya, n, replace=True)
         xb = rng.choice(ya, n, replace=True)
-        flip = (xb == 0) & (rng.random(n) < q)
-        xb[flip] = rng.choice(pos, int(flip.sum()), replace=True)
+        if scheme == "mixture":
+            flip = (xb == 0) & (rng.random(n) < par)
+            xb[flip] = rng.choice(pos, int(flip.sum()), replace=True)
+        else:
+            xb = np.clip(xb * par, 0.0, 1.0)
         hits += _ci_excludes_zero(xa, xb)
-    return hits / reps, float(q)
+    return hits / reps, float(par)
+
+
+def analytic_power(delta, mde_value, alpha=0.05, power=0.8):
+    """Power of the two-sided normal test at a true gap `delta`, for a setting whose MDE (at the given
+    alpha and power) is `mde_value`. At delta = mde_value it returns `power` by construction."""
+    se = mde_value / (norm.ppf(1 - alpha / 2) + norm.ppf(power))
+    z = norm.ppf(1 - alpha / 2)
+    d = abs(delta) / se
+    return float(norm.cdf(d - z) + norm.cdf(-d - z))
